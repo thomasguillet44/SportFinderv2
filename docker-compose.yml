@@ -1,0 +1,24 @@
+name: sportfinderV2
+
+services:
+  backend:
+    build: 
+      context: ./backend/
+      dockerfile: ./src/dockerfiles/Dockerfile.local
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./backend:/app
+      - /app/node_modules
+
+  frontend:
+    build: 
+      context: ./frontend/
+      dockerfile: ./src/dockerfiles/Dockerfile.local
+    ports:
+      - "5173:5173"
+    depends_on:
+      - backend
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules

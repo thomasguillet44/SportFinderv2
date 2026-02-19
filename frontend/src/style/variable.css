@@ -1,0 +1,22 @@
+
+:root {
+  --yellow-50:  #fffdf5;
+  --yellow-100: #fff9db;
+  --yellow-200: #fff3bf;
+  --yellow-300: #ffec99;
+  --yellow-400: #ffe066;
+  --yellow-500: #ffd43b;
+  --yellow-600: #fcc419;
+  --yellow-700: #fab005;
+  --yellow-800: #f59f00;
+  --yellow-900: #e67700;
+
+  --text-primary: #1f1f1f;
+  --text-secondary: #555555;
+  --text-muted: #888888;       
+  --text-on-yellow: #1a1a1a;   
+
+  --font-title: 'Gravitas One', sans-serif;
+  --font-subtitle: 'Montserrat', sans-serif;
+  --font-body: 'Inter', sans-serif;
+}

@@ -1,0 +1,81 @@
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+.btn {
+    margin: 5px;
+    padding: 5px;
+    align-self: center;
+    cursor: pointer;
+}
+
+.btn-primary {
+    background-color: var(--yellow-500);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: var(--font-subtitle);
+}
+
+.btn-primary:hover {
+    background-color: var(--yellow-400);
+}
+
+.login-btn {
+    grid-column: 3;
+    justify-self: end;
+    justify-content: center;
+    align-items: center;
+    font-size: 7vh;
+    background-color: transparent;
+    color: var(--yellow-500);
+    border: none;
+}
+
+.login-btn:hover {
+    transform: translate(-1px, -1px);
+    text-shadow: 1px 1px 0 var(--yellow-100);
+}
+
+.main-title {
+    grid-column: 2;
+    text-align: center;
+    justify-self: center;
+    font-family: var(--font-title);
+    color: var(--yellow-500);
+    font-size: 5vh;
+}
+
+.user-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 3vh;
+}
+
+.user-title {
+    font-family: var(--font-subtitle)
+}
+
+.map-wrapper {
+    height: 100%; 
+    width: 100%; 
+}
+
+#map {
+    height: 100%; 
+    width: 100%;   
+}
+
+.sports-filters {
+    margin: 3px;
+    align-self: center;
+}
+
+.footer-container {
+    font-family: var(--font-subtitle);
+    color: var(--yellow-500);
+    font-size: 3vh;
+}
