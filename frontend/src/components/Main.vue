@@ -1,5 +1,9 @@
 <template>  
-    <Map @map-coordinates="handleMapCoordinates" :sports-fields="sportsFields"></Map>
+    <Map 
+        @map-coordinates="handleMapCoordinates" 
+        :sports-fields="sportsFields" 
+        :isLoadingFields="isLoadingFields">
+    </Map>
 </template>
 <script setup>
 import { ref, watch } from 'vue';
@@ -16,6 +20,8 @@ const boudingBox = ref(null);
 
 const sportsFields = ref([]);
 
+const isLoadingFields = ref(false);
+
 const handleMapCoordinates = (coordinates) => {
     mapCoordinates.value = coordinates;
     boudingBox.value = getBoudingBox(coordinates, 5);
@@ -24,12 +30,15 @@ const handleMapCoordinates = (coordinates) => {
 };
 
 watch(() => props.selectedSport, () => {
+    isLoadingFields.value = true;
     fetchSportsFields(props.selectedSport, boudingBox.value)
         .then((sportsFieldsData) => {
             sportsFields.value = sportsFieldsData;
+            isLoadingFields.value = false;
         })
         .catch((error) => {
             console.error("Error fetching sports fields:", error);
+            isLoadingFields.value = false;
         });
 });
 </script>

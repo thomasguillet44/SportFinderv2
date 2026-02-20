@@ -14,6 +14,9 @@ const props = defineProps({
     sportsFields: {
         type: Array,
         default: () => []
+    },
+    isLoadingFields: {
+        type: Boolean
     }
 });
 
@@ -35,9 +38,8 @@ const whereAmIIcon = L.divIcon({
 });
 
 const isLocating = ref(true);
-const isLoadingFields = ref(false);
 
-const isLoading = computed(() => isLocating.value || isLoadingFields.value);
+const isLoading = computed(() => isLocating.value || props.isLoadingFields);
 
 const emit = defineEmits(["map-coordinates"]);
 
@@ -68,8 +70,7 @@ onMounted(async() => {
 
 watch(() => props.sportsFields, (newSportsFields) => {
     markersLayer.clearLayers(); // on vide le layer directement et on le réaliment pour éviter d'avoir à recréer la map à chaque fois
-    
-    isLoadingFields.value = true;
+
     newSportsFields.elements.forEach((field) => {
         if (field.center?.lat && field.center?.lon) {
             L.marker([field.center.lat, field.center.lon])
@@ -77,6 +78,5 @@ watch(() => props.sportsFields, (newSportsFields) => {
                 .addTo(markersLayer);
         }
     });
-    isLoadingFields.value = false;
 });
 </script>

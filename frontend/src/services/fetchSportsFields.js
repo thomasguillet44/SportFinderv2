@@ -12,6 +12,6 @@ export const fetchSportsFields = async function(sport, boudingBox) {
         console.log("response: ", response);
         return response.data;
     } catch (error) {
-        console.error("Erreur dans la récupération des sports fields: ", error);
+        throw new Error("Erreur dans la récupération des sports fields: " + error.message);
     }
 };
