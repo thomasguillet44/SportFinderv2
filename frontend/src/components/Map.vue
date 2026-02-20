@@ -1,10 +1,13 @@
 <template>
     <div class="map-wrapper">
-        <div id="map"></div>
+        <div id="map" :class="{ 'map-blur': isLocating }"></div>
+        <div v-if="isLoading" class="map-overlay">
+            <div class="spinner"></div>
+        </div>
     </div>  
 </template>
 <script setup>
-import { onMounted, watch } from 'vue';
+import { onMounted, watch, ref, computed } from 'vue';
 import { centerMapOnCurrentLocation } from '@/utils/UtilsMap';
 
 const props = defineProps({
@@ -31,6 +34,11 @@ const whereAmIIcon = L.divIcon({
     iconAnchor: [5, 5] //sinon par défaut centre par rapport au coin supérieur gauche
 });
 
+const isLocating = ref(true);
+const isLoadingFields = ref(false);
+
+const isLoading = computed(() => isLocating.value || isLoadingFields.value);
+
 const emit = defineEmits(["map-coordinates"]);
 
 let markersLayer = L.layerGroup(); //layer pour les marqueurs des terrains de sport
@@ -47,6 +55,8 @@ onMounted(async() => {
 
     const coordinates = await centerMapOnCurrentLocation(map);
 
+    isLocating.value = false;
+
     emit("map-coordinates", coordinates);
    
     L.marker([coordinates[0], coordinates[1]], { icon: whereAmIIcon })
@@ -59,6 +69,7 @@ onMounted(async() => {
 watch(() => props.sportsFields, (newSportsFields) => {
     markersLayer.clearLayers(); // on vide le layer directement et on le réaliment pour éviter d'avoir à recréer la map à chaque fois
     
+    isLoadingFields.value = true;
     newSportsFields.elements.forEach((field) => {
         if (field.center?.lat && field.center?.lon) {
             L.marker([field.center.lat, field.center.lon])
@@ -66,5 +77,6 @@ watch(() => props.sportsFields, (newSportsFields) => {
                 .addTo(markersLayer);
         }
     });
+    isLoadingFields.value = false;
 });
 </script>
