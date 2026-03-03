@@ -22,37 +22,32 @@ html, body {
 .btn-primary:hover {
     background-color: var(--yellow-400);
 }
-
-.login-btn {
+.login-container {
+    position: relative;
     grid-column: 3;
     justify-self: end;
     justify-content: center;
     align-items: center;
-    font-size: 7vh;
+}
+
+.login-modale-btn {
     background-color: transparent;
     color: var(--yellow-500);
     border: none;
+    font-size: 8vh;
 }
 
-.login-btn:hover {
+.login-modale-btn:hover {
     transform: translate(-1px, -1px);
-    text-shadow: 1px 1px 0 var(--yellow-100);
+    text-shadow: 1px 1px 0 var(--yellow-500);
 }
 
 .main-title {
     grid-column: 2;
-    text-align: center;
     justify-self: center;
     font-family: var(--font-title);
     color: var(--yellow-500);
     font-size: 5vh;
-}
-
-.user-container {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-size: 3vh;
 }
 
 .user-title {
@@ -73,6 +68,7 @@ html, body {
     filter: blur(3px);
 }
 
+/* Overlay qui blurr la carte quand les données chargent */
 .map-overlay {
     position: absolute;
     inset: 0; /* top: 0; left: 0; right: 0; bottom: 0; -> l'élément couvre entièrement son parent */
@@ -103,8 +99,231 @@ html, body {
     align-self: center;
 }
 
+select, 
+select::picker(select) {
+    appearance: base-select;
+    font-family: var(--font-subtitle);
+    color: var(--yellow-500);
+    background-color: black;
+    border: 1px solid var(--yellow-500);
+    border-radius: 4px;
+    padding: 5px;
+    cursor: pointer;
+}
+
 .footer-container {
     font-family: var(--font-subtitle);
     color: var(--yellow-500);
     font-size: 3vh;
+}
+
+/* === MODALE === */
+.bloc-modale {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 11;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+}
+
+.modale {
+    position: relative;
+    background: black;
+    color: var(--yellow-500);
+    border-radius: 10px;
+    box-shadow: 0 2px 4px var(--yellow-300);
+    width: 22vw;
+    padding: 30px;
+    border: 1px solid var(--yellow-300);
+    font-family: var(--font-subtitle);
+}
+
+.modale-title {   
+    text-align: center;
+    font-size: 4vh;
+    margin-bottom: 20px;
+}
+
+.formGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-bottom: 10px;
+}
+
+.login-btn {   
+    background-color: var(--yellow-500);
+    color: black;
+    border-color: var(--yellow-500);
+    border-radius: 7px;
+    padding: 5px;
+    font-size: 15px;
+}
+
+.login-btn:hover {
+    background-color: black;
+    color: var(--yellow-500);
+    border-color: black;
+}   
+
+.custom-input {
+    padding: 8px;
+    border: 1px solid var(--yellow-500);
+    border-radius: 4px;
+    background-color: transparent;
+    color: var(--yellow-300);
+}
+
+.custom-input:focus {
+    outline: none;
+    border: none;
+}
+
+.btn-login-container {
+    display: flex;
+    justify-content: center;
+}
+
+.toggle-register-btn {
+    background-color: transparent;
+    color: var(--yellow-500);
+    border: none;
+    font-size: 14px;
+    margin-top: 15px;
+}
+
+.toggle-register-btn:hover {
+    text-decoration: underline;
+}
+
+.form-wrapper {
+    overflow: hidden;
+}
+
+.slide-up-enter-active,
+.slide-up-leave-active {
+    transition: all 0.4s ease;
+}
+
+.slide-up-enter-from {
+    transform: translateY(40px);
+    opacity: 0;
+}
+
+.slide-up-enter-to {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.slide-up-leave-from {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.slide-up-leave-to {
+    transform: translateY(-40px);
+    opacity: 0;
+}
+
+.error-message {
+  animation: fadeOut 3s forwards;
+  border: 1px solid red;
+  color: red;
+}
+
+@keyframes fadeOut {
+  0% { opacity: 1; }
+  80% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+.user-wrapper {
+    position: relative;
+    display: inline-block;
+    padding: 20px;
+}
+
+.user-container {
+    display: flex;
+    flex-direction: row-reverse; /* met l'icone a droite */
+    align-items: center;
+    justify-content: flex-end;
+    cursor: pointer;
+    padding-right: 8px;
+    overflow: hidden; /* pour cacher le texte quand non hover */
+    color: var(--yellow-500);
+    font-size: 5vh;
+}
+
+.user-container .username {
+    opacity: 0; /* le nom est caché par une opacity null */
+    margin-left: 0;
+    transition: opacity 0.3s ease, margin-left 0.3s ease;
+    white-space: nowrap; /* empêche le nom de passer à la ligne */
+}
+
+.user-wrapper:hover .username {
+    opacity: 1;
+    margin-left: 8px;
+}
+
+.user-wrapper:hover {
+    border: 3px solid var(--yellow-500);
+    border-radius: 7px;
+    background-color: transparent;
+    padding: 5px;
+}
+
+.menu-container {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    opacity: 0;
+    transform: translateY(10px);
+    pointer-events: none; /* empêche interaction quand caché */
+    transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.user-wrapper:hover .menu-container {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+.menu-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.menu-item {
+    padding: 12px 16px;
+    color: var(--yellow-500);
+    font-size: 25px;
+    cursor: pointer;
+    font-family: var(--font-subtitle);
+}
+
+.menu-item:hover {
+    background: rgba(255, 255, 255, 0.05);
+    transform: translateX(4px);
+}
+
+.menu-item.logout:hover {
+    background-color: var(--yellow-500);
+    color: black;
+    border-radius: 5px;
 }

@@ -1,3 +1,6 @@
+const MAX_RETRY = process.env.MAX_RETRY_OSM || 5;
+const RETRY_DELAY = 1000;
+
 export const getSportsFieldInArea = async function(sport, necoordinates, swcoordinates) {
     const [nelat, nelng] = necoordinates.split(',');
     const [swlat, swlng] = swcoordinates.split(',');
@@ -9,23 +12,31 @@ export const getSportsFieldInArea = async function(sport, necoordinates, swcoord
 
     const finalQuery = queryInit + queryContent + queryCoordinates + queryEnd;
 
-    console.log("Final query: ", finalQuery);
+    let attempt = 0;
+    while (attempt < MAX_RETRY) {
 
-    try {
-        const response = await fetch('https://overpass-api.de/api/interpreter', {
-            method: 'POST',
-            body: `data=${encodeURIComponent(finalQuery)}`,
-            headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'
+        try {
+            const response = await fetch('https://overpass-api.de/api/interpreter', {
+                method: 'POST',
+                body: `data=${encodeURIComponent(finalQuery)}`,
+                headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                }
+            });
+
+            const text = await response.text();
+            const data = JSON.parse(text);
+            
+            return data;
+
+        } catch (error) {
+            attempt++;
+
+            if (attempt >= MAX_RETRY) {
+                throw new Error(`Échec après ${MAX_RETRY} tentatives: ${error.message}`);
             }
-        });
 
-        const text = await response.text();
-        const data = JSON.parse(text);
-        
-        return data;
-
-    } catch (error) {
-        throw new Error(`Erreur lors de l'exécution de la requête OSM: ${error.message}`);
-    }
+            await new Promise(resolve => setTimeout(resolve, RETRY_DELAY)); //ajout de délai entre les tentatives
+        }
+    }   
 }

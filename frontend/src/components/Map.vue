@@ -46,7 +46,10 @@ const emit = defineEmits(["map-coordinates"]);
 let markersLayer = L.layerGroup(); //layer pour les marqueurs des terrains de sport
 
 onMounted(async() => {
-    let map = L.map('map').setView([currentLocation.lat, currentLocation.lng], 13);
+    let map = L.map('map', {
+        zoomControl: false,
+        attributionControl: false // on supprime les crédits en bas, c pas cool mais c plus beau
+    }).setView([currentLocation.lat, currentLocation.lng], 13);
 
     L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
         attribution:
@@ -69,10 +72,16 @@ onMounted(async() => {
 });
 
 watch(() => props.sportsFields, (newSportsFields) => {
-    markersLayer.clearLayers(); // on vide le layer directement et on le réaliment pour éviter d'avoir à recréer la map à chaque fois
+    markersLayer.clearLayers(); // on vide le layer directement et on le réalimente pour éviter d'avoir à recréer la map à chaque fois
 
     newSportsFields.elements.forEach((field) => {
-        if (field.center?.lat && field.center?.lon) {
+        // on fait out center dans notre requete OSM, donc pour les ways et les relations 
+        // on recupere un centre, mais pas pour les nodes, qui sont des points, d'ou les deux traitements différents
+        if (field.type === 'node' && field.lat && field.lon) {
+            L.marker([field.lat, field.lon])
+                .bindPopup(field.tags?.name || field.tags?.sport || 'N/A')
+                .addTo(markersLayer);
+        } else if ((field.type === 'way' || field.type === 'relation') && field.center?.lat && field.center?.lon) {
             L.marker([field.center.lat, field.center.lon])
                 .bindPopup(field.tags?.name || field.tags?.sport || 'N/A')
                 .addTo(markersLayer);

@@ -2,19 +2,26 @@ import express from 'express';
 import cors from 'cors';
 import router from './router.js';
 
-const app = express()
-const PORT = 3000
+import { connectToDB } from './configuration/connedctToDB.js';
 
-app.use(express.json())
+const app = express();
+const PORT = 3000;
+
+app.use(express.json());
 
 app.use(cors());
 
 app.use('/api', router);
 
+/**
+ * Utilisé pour tester si le back est opérationnel pour bien ordonner le lancement 
+ * des services dans le docker-compose
+ */
 app.get('/health', (req, res) => {
-    res.json({ status: 'ok' })
+    res.status(200).json({ status: 'ok' });
 })
 
-app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`)
+app.listen(PORT, async () => {
+    console.log(`Server running on port ${PORT}`);
+    await connectToDB();
 })

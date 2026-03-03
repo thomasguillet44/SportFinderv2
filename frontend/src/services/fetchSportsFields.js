@@ -9,7 +9,7 @@ export const fetchSportsFields = async function(sport, boudingBox) {
                 swcoordinates: boudingBox.southWest.lat + "," + boudingBox.southWest.lon
             }
         });
-        console.log("response: ", response);
+        
         return response.data;
     } catch (error) {
         throw new Error("Erreur dans la récupération des sports fields: " + error.message);
