@@ -10,8 +10,7 @@
   background-color: black;
   color: var(--yellow-500);
   border-radius: 5px;
-  padding-bottom: 10px;
-  padding-left: 20px;
+  padding: clamp(8px, 1vw, 10px);
 
   animation: slideUp 0.5s ease-out;
 }
@@ -55,9 +54,9 @@ to {
 /* MENU SPORT ELEMENT */
 .menu-sport-element {
   display: grid;
-  grid-template-rows: auto 50px 50px;
+  grid-template-rows: auto 50px 100px;
   gap: 5px;
-  min-width: 35vw;
+  min-width: 100px;
 }
 
 .btn-close-menu-sport-element {
@@ -81,10 +80,39 @@ to {
 
 .third-line-menu-sport-element {
   display: flex;
-  justify-content: flex-end;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
   font-family: var(--font-subtitle);
-  font-size: 14px;
-  gap: 5px;
-  padding: 10px;
+  font-size: 8px;
+  gap: 2px;
+  padding: 3px;
+}
+
+.third-line-menu-sport-element .a {
+  width: 100%;
+}
+
+@media (min-width: 769px) {
+    .third-line-menu-sport-element {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-end;
+      align-items: center;
+      font-family: var(--font-subtitle);
+      font-size: 14px;
+      gap: 5px;
+      padding: 10px;
+    }
+
+    .third-line-menu-sport-element .a {
+      width: auto;
+    }
+
+    .menu-sport-element {
+      display: grid;
+      grid-template-rows: auto 50px 50px;
+      gap: 5px;
+      min-width: 35vw;
+  }
 }

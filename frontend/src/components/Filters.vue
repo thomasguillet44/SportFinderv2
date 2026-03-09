@@ -1,7 +1,7 @@
 <template>
     <div class="sports-filters">
         <select id="sport" v-model="selectedSport">
-            <option disabled value="">-- Sélectionner un sport --</option>
+            <option disabled value="" selected hidden>-- Pickup sport --</option>
             <option
                 v-for="sport in sportOptions"
                 :key="sport.value"

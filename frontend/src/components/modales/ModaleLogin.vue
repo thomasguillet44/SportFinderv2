@@ -2,7 +2,7 @@
     <div class="bloc-modale">
         <div class="overlay" @click="emitsClose"></div>
         <div class="modale">
-            <div class="modale-title">Bienvenu</div>
+            <div class="modale-title">Bienvenue.s</div>
             <div class="form-wrapper">
                 <transition name="slide-up" mode="out-in">
                     <form v-if="!wantToRegister" key="login" @submit.prevent="login">

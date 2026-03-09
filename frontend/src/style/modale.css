@@ -26,7 +26,7 @@
     color: var(--yellow-500);
     border-radius: 10px;
     box-shadow: 0 2px 4px var(--yellow-300);
-    width: 22vw;
+    width: clamp(140px, 22vw, 500px);
     padding: 30px;
     border: 1px solid var(--yellow-300);
     font-family: var(--font-subtitle);

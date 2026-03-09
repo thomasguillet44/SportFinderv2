@@ -84,12 +84,4 @@ select::picker(select) {
 }
 
 
-/* FOOTER */
-.footer-container {
-    font-family: var(--font-subtitle);
-    color: var(--yellow-500);
-    font-size: 3vh;
-}
-
-
 
