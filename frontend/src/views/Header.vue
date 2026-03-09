@@ -9,25 +9,26 @@
                 <i class="bi bi-person"></i>
                 <span class="username">{{ username }}</span>
             </div>
-            <MenuUser/>
+            <MenuUser @show-favoris="handleShowFavoris"/>
         </div>
     </div>
     
 </template>
 <script setup>
 import MenuUser from '@/components/MenuUser.vue';
-import { ref } from 'vue';
 
 const props = defineProps({
     username: String,
     isLoggedIn: Boolean
 });
 
-const isMenuToggled = ref(false);
-
-const emits = defineEmits(['open-login']);
+const emits = defineEmits(['open-login', 'show-favoris']);
 
 const openModaleLogin = () => {
     emits('open-login');
+}
+
+const handleShowFavoris = () => {
+    emits('show-favoris');
 }
 </script>

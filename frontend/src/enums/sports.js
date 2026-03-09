@@ -5,7 +5,6 @@ export const Sports = Object.freeze({
     BEACH_VOLLEYBALL: { value: "beachvolleyball", label: "Beach - Volley" },
     FUTSAL: { value: "futsal", label: "Futsal" },
     HANDBALL: { value: "handball", label: "Handball" },
-    PADDLE_TENNIS: { value: "paddle_tennis", label: "Paddle-tennis" },
     PADEL: { value: "padel", label: "Padel" },
     PELOTA: { value: "pelota", label: "Pelote basque" },
     PICKLEBALL: { value: "pickleball", label: "Pickleball" },

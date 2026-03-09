@@ -1,0 +1,97 @@
+.login-container {
+    position: relative;
+    grid-column: 3;
+    justify-self: end;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-modale-btn {
+    background-color: transparent;
+    color: var(--yellow-500);
+    border: none;
+    font-size: 8vh;
+}
+
+.login-modale-btn:hover {
+    transform: translate(-1px, -1px);
+    text-shadow: 1px 1px 0 var(--yellow-500);
+}
+
+.formGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-bottom: 10px;
+}
+
+.custom-input {
+    padding: 8px;
+    border: 1px solid var(--yellow-500);
+    border-radius: 4px;
+    background-color: transparent;
+    color: var(--yellow-300);
+}
+
+.custom-input:focus {
+    outline: none;
+    border: none;
+}
+
+.btn-login-container {
+    display: flex;
+    justify-content: center;
+}
+
+.toggle-register-btn {
+    background-color: transparent;
+    color: var(--yellow-500);
+    border: none;
+    font-size: 14px;
+    margin-top: 15px;
+}
+
+.toggle-register-btn:hover {
+    text-decoration: underline;
+}
+
+.form-wrapper {
+    overflow: hidden;
+}
+
+.slide-up-enter-active,
+.slide-up-leave-active {
+    transition: all 0.4s ease;
+}
+
+.slide-up-enter-from {
+    transform: translateY(40px);
+    opacity: 0;
+}
+
+.slide-up-enter-to {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.slide-up-leave-from {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.slide-up-leave-to {
+    transform: translateY(-40px);
+    opacity: 0;
+}
+
+.error-message {
+  animation: fadeOut 3s forwards;
+  border: 1px solid red;
+  color: red;
+}
+
+@keyframes fadeOut {
+  0% { opacity: 1; }
+  80% { opacity: 1; }
+  100% { opacity: 0; }
+}

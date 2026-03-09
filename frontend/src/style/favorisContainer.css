@@ -1,0 +1,87 @@
+.favoris-container {
+    display: flex;
+    flex-direction: column;
+
+    position: fixed;
+    top: 50%;
+    left: 20px;
+    transform: translateY(-50%); /* centré verticalement */
+
+    z-index: 1100;
+    border: 1px solid var(--yellow-500);
+    background-color: black;
+    color: var(--yellow-500);
+    border-radius: 5px;
+    padding: 10px;
+
+    animation: appears 0.3s ease-out;
+
+    height: 50vh;
+    width: 40vh;
+}
+
+.favoris-list {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    height: 100%;
+    overflow-y: auto;
+    flex: 1
+}
+
+.btn-close-favoris-container {
+    background: none;
+    border: none;
+    color: var(--yellow-500);
+    font-size: 18px;
+}
+
+.first-line-favoris-container {
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--font-subtitle);
+    font-size: 16px;
+}
+
+.favori-item {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    
+    padding: 12px 15px;
+    margin-top: 10px;
+
+    border: 1px solid var(--yellow-500);
+    border-radius: 6px;
+
+    background: #111;
+}
+
+.favori-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.favori-name {
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.favori-sport {
+    font-size: 12px;
+    opacity: 0.7;
+}
+
+.button-container {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+@keyframes appears {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}

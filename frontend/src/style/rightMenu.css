@@ -1,0 +1,77 @@
+.user-wrapper {
+    position: relative;
+    display: inline-block;
+    padding: 20px;
+}
+
+.user-container {
+    display: flex;
+    flex-direction: row-reverse; /* met l'icone a droite */
+    align-items: center;
+    justify-content: flex-end;
+    cursor: pointer;
+    padding-right: 8px;
+    overflow: hidden; /* pour cacher le texte quand non hover */
+    color: var(--yellow-500);
+    font-size: 5vh;
+}
+
+.user-container .username {
+    opacity: 0; /* le nom est caché par une opacity null */
+    margin-left: 0;
+    transition: opacity 0.3s ease, margin-left 0.3s ease;
+    white-space: nowrap; /* empêche le nom de passer à la ligne */
+}
+
+.user-wrapper:hover .username {
+    opacity: 1;
+    margin-left: 8px;
+}
+
+.user-wrapper:hover {
+    border: 3px solid var(--yellow-500);
+    border-radius: 7px;
+    background-color: transparent;
+    padding: 5px;
+}
+
+.menu-container {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    opacity: 0;
+    transform: translateY(10px);
+    pointer-events: none; /* empêche interaction quand caché */
+    transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.user-wrapper:hover .menu-container {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+.menu-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.menu-item {
+    padding: 12px 16px;
+    color: var(--yellow-500);
+    font-size: 25px;
+    cursor: pointer;
+    font-family: var(--font-subtitle);
+}
+
+.menu-item:hover {
+    background: rgba(255, 255, 255, 0.05);
+    transform: translateX(4px);
+}
+
+.menu-item.logout:hover {
+    background-color: var(--yellow-500);
+    color: black;
+    border-radius: 5px;
+}

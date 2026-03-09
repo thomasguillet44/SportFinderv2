@@ -18,7 +18,7 @@
                             {{ errorLoginMessage }}
                         </div>
                         <div class="btn-login-container">
-                            <button class="btn login-btn" type="submit" :disabled="isLoading">
+                            <button class="btn btn-primary" type="submit" :disabled="isLoading">
                                 {{ isLoading ? 'Connecting...' : 'Valider' }}
                             </button>
                         </div>
@@ -47,7 +47,7 @@
                         </div>
 
                         <div class="btn-login-container">
-                            <button class="btn login-btn" type="submit">Valider</button>
+                            <button class="btn btn-primary" type="submit">Valider</button>
                         </div>
 
                         <button type="button" class="btn toggle-register-btn" @click="toggleRegister">

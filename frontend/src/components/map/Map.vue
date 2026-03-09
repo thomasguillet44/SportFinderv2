@@ -41,9 +41,27 @@ const isLocating = ref(true);
 
 const isLoading = computed(() => isLocating.value || props.isLoadingFields);
 
-const emit = defineEmits(["map-coordinates"]);
+let selectedMarker = null;
+
+const emit = defineEmits(["map-coordinates", "change-selected-field"]);
 
 let markersLayer = L.layerGroup(); //layer pour les marqueurs des terrains de sport
+
+const emitChangeSelectedField = (name, sport, lat, lon) => {
+    emit("change-selected-field", { name, sport, lat, lon });
+}
+
+//fonction qu'on expose au parent pour qu'il puisse clear le marker quand ferme la fenetre
+const clearSelectedMarker = () => {
+    if (selectedMarker) {
+        selectedMarker.getElement()?.classList.remove("selected-marker");
+        selectedMarker = null;
+    }
+}
+
+defineExpose({
+    clearSelectedMarker
+});
 
 onMounted(async() => {
     let map = L.map('map', {
@@ -77,14 +95,43 @@ watch(() => props.sportsFields, (newSportsFields) => {
     newSportsFields.elements.forEach((field) => {
         // on fait out center dans notre requete OSM, donc pour les ways et les relations 
         // on recupere un centre, mais pas pour les nodes, qui sont des points, d'ou les deux traitements différents
+        let lat, lon;
+
         if (field.type === 'node' && field.lat && field.lon) {
-            L.marker([field.lat, field.lon])
-                .bindPopup(field.tags?.name || field.tags?.sport || 'N/A')
-                .addTo(markersLayer);
-        } else if ((field.type === 'way' || field.type === 'relation') && field.center?.lat && field.center?.lon) {
-            L.marker([field.center.lat, field.center.lon])
-                .bindPopup(field.tags?.name || field.tags?.sport || 'N/A')
-                .addTo(markersLayer);
+            lat = field.lat;
+            lon = field.lon;
+        } 
+        else if ((field.type === 'way' || field.type === 'relation') && field.center?.lat && field.center?.lon) {
+            lat = field.center.lat;
+            lon = field.center.lon;
+        }
+
+        if (lat && lon) {
+            const name = field.tags?.name || 'N/A';
+            const sport = field.tags?.sport || 'N/A';
+
+            const marker = L.marker([lat, lon], {
+                icon: L.divIcon({
+                    className: "sport-marker",
+                    iconSize: [14, 14],
+                    iconAnchor: [7, 7]
+                })
+            });
+
+            marker.on('click', () => {
+                // version css : on ajoute/retire la class css correspondant à selected element en fonction du click utilisateur
+                if (selectedMarker) {                   
+                    selectedMarker.getElement()?.classList.remove("selected-marker");
+                }
+
+                marker.getElement()?.classList.add("selected-marker");
+
+                selectedMarker = marker;
+
+                emitChangeSelectedField(name, sport, lat, lon);                
+            });
+
+            marker.addTo(markersLayer);
         }
     });
 });
