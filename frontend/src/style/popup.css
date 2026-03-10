@@ -20,6 +20,7 @@
   grid-template-columns: 1fr 24px;
   align-items: start;
   padding-right: 4px;
+  min-width: 100px;
 }
 
 @keyframes slideUp {

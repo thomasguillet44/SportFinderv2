@@ -44,11 +44,11 @@ ul {
 }
 
 .main-title {
-    grid-column: 2;
+    grid-column: 1;
     justify-self: center;
     font-family: var(--font-title);
     color: var(--yellow-500);
-    font-size: 5vh;
+    font-size: clamp(1.3rem, 1.5vw, 1.8rem);
 }
 
 /* SPINNER */
@@ -81,7 +81,15 @@ select::picker(select) {
     border-radius: 4px;
     padding: 5px;
     cursor: pointer;
+    font-size: clamp(12px, 2vw, 16px);
 }
 
-
-
+@media (min-width: 769px) {
+    .main-title {
+        grid-column: 2;
+        justify-self: center;
+        font-family: var(--font-title);
+        color: var(--yellow-500);
+        font-size: 5vh;
+    }
+}  

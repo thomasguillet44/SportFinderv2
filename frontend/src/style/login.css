@@ -2,7 +2,6 @@
     position: relative;
     grid-column: 3;
     justify-self: end;
-    justify-content: center;
     align-items: center;
 }
 

@@ -3,7 +3,7 @@
         <ul class="menu-list">
             <li class="menu-item">Réglages</li>
             <li class="menu-item" @click="showFavoris">Favoris</li>
-            <li class="menu-item logout" @click="logout">Logout</li>
+            <li class="menu-item" @click="logout">Logout</li>
         </ul>
     </div>
 </template>

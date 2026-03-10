@@ -3,13 +3,7 @@
     height: 100vh;
     width: 100vw;
     overflow: hidden;
-    --header-height: 10vh;
-}
-
-@media (max-width: 768px) {
-    .layout {
-        --header-height: 15vh;
-    }
+    --header-height: clamp(80px, 10vh, 100px);
 }
 
 .header {
@@ -19,7 +13,7 @@
     right: 0;
     z-index: 10;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
     padding: 10px;
     height: var(--header-height);
 }
@@ -34,8 +28,6 @@
     position: absolute;
     top: var(--header-height);
     margin-top: 10px;
-    left: 50%;
-    transform: translateX(-50%);
     z-index: 10;
 }
 
@@ -50,4 +42,16 @@
     font-family: var(--font-subtitle);
     color: var(--yellow-500);
     font-size: 3vh;
+}
+
+
+@media (min-width: 769px) {
+    .filters {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .header {
+        grid-template-columns: 1fr 50vw 1fr;
+    }
 }
