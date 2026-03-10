@@ -28,7 +28,7 @@ jobs:
             cat <<EOF > /home/debian/SportFinderv2/backend/env_files/.env.production
           
             # Connexion PostgreSQL via le nom du service Docker
-            HOST_DB=jdbc:postgresql://postgres-prod:5432
+            HOST_DB=postgres-prod
             PORT_DB=5432
             USER_DB=${{ secrets.POSTGRES_USER }}
             PASSWORD_DB=${{ secrets.POSTGRES_PASSWORD }}
