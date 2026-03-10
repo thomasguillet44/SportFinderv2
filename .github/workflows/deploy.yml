@@ -24,8 +24,8 @@ jobs:
 
       - name: Create .env.production on server
         run: |
-          ssh -i ~/.ssh/id_acces_gh -p 54987 debian@51.68.234.182 "
-            cat > /home/debian/SportFinderv2/backend/env_files/.env.production <<EOL
+          ssh -p ${{ secrets.SERVER_PORT_SSH }} debian@${{ secrets.SERVER_HOST }} "
+            cat <<EOF > /home/debian/SportFinderv2/backend/env_files/.env.production
           
             # Connexion PostgreSQL via le nom du service Docker
             HOST_DB=jdbc:postgresql://postgres-prod:5432
@@ -35,16 +35,16 @@ jobs:
             NAME_DB=${{ secrets.POSTGRES_DB }}
             JWT_SECRET=${{ secrets.JWT_SECRET }}
             
-            EOL
+            EOF
           "
 
 
       - name: Deploy on server
         run: |
           ssh -p ${{ secrets.SERVER_PORT_SSH }} debian@${{ secrets.SERVER_HOST }} "
-            cd /home/debian/OSM-Sport-Request &&
+            cd /home/debian/SportFinderv2 &&
             git pull &&
             docker compose -f docker-compose.production.yml down &&
-            docker compose -f docker-compose.production.yml build --no-cache &&
+            docker compose -f docker-compose.production.yml build &&
             docker compose -f docker-compose.production.yml up -d
           "
