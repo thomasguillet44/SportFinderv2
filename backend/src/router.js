@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import mapRouter from './routes/maprouter.js';
+import mapRouter from './routes/mapRouter.js';
 import loginRouter from './routes/loginRouter.js';
 import favoriRouter from './routes/favoriRouter.js';
 
