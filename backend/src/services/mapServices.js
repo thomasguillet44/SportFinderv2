@@ -1,4 +1,4 @@
-const MAX_RETRY = process.env.MAX_RETRY_OSM || 5;
+const MAX_RETRY = 5;
 const RETRY_DELAY = 1000;
 
 export const getSportsFieldInArea = async function(sport, necoordinates, swcoordinates) {

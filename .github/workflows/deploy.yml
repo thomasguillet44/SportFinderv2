@@ -1,0 +1,50 @@
+name: Deploy Sport-Finder
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup SSH
+        uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Add server to known_hosts
+        run: |
+          ssh-keyscan -p ${{ secrets.SERVER_PORT_SSH }} -H ${{ secrets.SERVER_HOST }} >> ~/.ssh/known_hosts
+
+      - name: Create application-production.properties on server
+        run: |
+          ssh -i ~/.ssh/id_acces_gh -p 54987 debian@51.68.234.182 "
+            cat > /home/debian/SportFinderV2/backend/env_files/.env.production <<EOL
+          
+            # Connexion PostgreSQL via le nom du service Docker
+            HOST_DB=jdbc:postgresql://postgres-prod:5432
+            PORT_DB=5432
+            USER_DB=${{ secrets.POSTGRES_USER }}
+            PASSWORD_DB=${{ secrets.POSTGRES_PASSWORD }}
+            NAME_DB=${{ secrets.POSTGRES_DB }}
+            JWT_SECRET=${{ secrets.JWT_SECRET }}
+            
+            EOL
+          "
+
+
+      - name: Deploy on server
+        run: |
+          ssh -p ${{ secrets.SERVER_PORT_SSH }} debian@${{ secrets.SERVER_HOST }} "
+            cd /home/debian/OSM-Sport-Request &&
+            git pull &&
+            docker compose -f docker-compose.production.yml down &&
+            docker compose -f docker-compose.production.yml build --no-cache &&
+            docker compose -f docker-compose.production.yml up -d
+          "
