@@ -1,0 +1,14 @@
+FROM node:23-alpine
+WORKDIR /app/backend
+
+COPY package*.json ./
+RUN npm install && sync
+
+RUN mkdir -p /app/.ssh
+RUN chmod 700 /app/.ssh
+
+COPY . .
+
+EXPOSE 3000
+
+CMD ["node", "src/index.js"]

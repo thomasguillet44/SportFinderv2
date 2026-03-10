@@ -22,7 +22,7 @@ jobs:
         run: |
           ssh-keyscan -p ${{ secrets.SERVER_PORT_SSH }} -H ${{ secrets.SERVER_HOST }} >> ~/.ssh/known_hosts
 
-      - name: Create application-production.properties on server
+      - name: Create .env.production on server
         run: |
           ssh -i ~/.ssh/id_acces_gh -p 54987 debian@51.68.234.182 "
             cat > /home/debian/SportFinderV2/backend/env_files/.env.production <<EOL

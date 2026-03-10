@@ -1,0 +1,28 @@
+# Étape 1 : Installation des dépendances
+FROM node:23-alpine AS builder
+WORKDIR /app/frontend
+
+# Copier package.json et installer les dépendances
+COPY package*.json ./
+RUN npm install && sync
+
+# Copie tout ce qui est dans le contexte dans le repertoire de travail
+COPY . .
+
+# Exécuter le build de l'application
+RUN npm run build && sync
+
+# Étape 2 : Configuration de Nginx pour servir l'application
+FROM nginx:alpine
+
+# Copier le dossier dist du builder vers le répertoire de Nginx
+COPY --from=builder /app/frontend/dist /usr/share/nginx/html
+
+# Copier la configuration Nginx
+COPY nginx/default.conf /etc/nginx/conf.d/
+
+# Exposer le port 80
+EXPOSE 80
+
+# Démarrer Nginx
+CMD ["nginx", "-g", "daemon off;"]
