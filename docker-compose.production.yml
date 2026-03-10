@@ -15,7 +15,7 @@ services:
     networks:
       - web
 
-  frontend:
+  sportfinderv2-app:
     build: 
       context: ./frontend/
       dockerfile: ./src/dockerfiles/Dockerfile.prod
