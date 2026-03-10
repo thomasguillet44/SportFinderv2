@@ -24,8 +24,6 @@ export const getSportsFieldInArea = async function(sport, necoordinates, swcoord
                 }
             });
 
-            console.log(`Tentative ${attempt + 1}: Statut de la réponse - ${response}`);
-
             const text = await response.text();
             const data = JSON.parse(text);
             

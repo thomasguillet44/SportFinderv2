@@ -2,14 +2,14 @@ import api from "@/api.js";
 
 export const fetchSportsFields = async function(sport, boudingBox) {
     try {
-        const response = await api.get("/api/map/sportsfacilities", {
+        const response = await api.get("/api/map/getsportsfacilities", {
             params: {
                 sport: sport,
                 necoordinates: boudingBox.northEast.lat + "," + boudingBox.northEast.lon,
                 swcoordinates: boudingBox.southWest.lat + "," + boudingBox.southWest.lon
             }
         });
-        
+
         return response.data;
     } catch (error) {
         throw new Error("Erreur dans la récupération des sports fields: " + error.message);

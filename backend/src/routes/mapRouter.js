@@ -3,6 +3,6 @@ import { getSportsFacilities } from '../controllers/mapController.js';
 
 const router = Router();
 
-router.get('/sportsfacilities', getSportsFacilities);
+router.get('/getsportsfacilities', getSportsFacilities);
 
 export default router;

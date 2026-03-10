@@ -91,7 +91,7 @@ onMounted(async() => {
 
 watch(() => props.sportsFields, (newSportsFields) => {
     markersLayer.clearLayers(); // on vide le layer directement et on le réalimente pour éviter d'avoir à recréer la map à chaque fois
-
+    console.log("Nouveaux terrains de sport reçus :", newSportsFields);
     newSportsFields.elements.forEach((field) => {
         // on fait out center dans notre requete OSM, donc pour les ways et les relations 
         // on recupere un centre, mais pas pour les nodes, qui sont des points, d'ou les deux traitements différents
