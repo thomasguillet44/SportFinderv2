@@ -11,7 +11,8 @@ app.use(express.json());
 
 app.use(cors());
 
-app.use('/api', router);
+const apiPrefix = process.env.NODE_ENV === 'local' ? '/api' : '';
+app.use(`${apiPrefix}`, router);
 
 /**
  * Utilisé pour tester si le back est opérationnel pour bien ordonner le lancement 
