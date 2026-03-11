@@ -33,6 +33,7 @@ export const getSportsFieldInArea = async function(sport, necoordinates, swcoord
             attempt++;
 
             if (attempt >= MAX_RETRY) {
+                console.error(`Échec après ${MAX_RETRY} tentatives:`, error);
                 throw new Error(`Échec après ${MAX_RETRY} tentatives: ${error.message}`);
             }
 

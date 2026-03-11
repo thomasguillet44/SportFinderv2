@@ -45,6 +45,7 @@ export const addFavori = async function(userId, element) {
 
         return result.rows[0];
     } catch (error) {
+        console.error('Erreur lors de l\'ajout du favori :', error);
         throw new Error('Erreur lors de l\'ajout du favori : ' + error.message);
     }
     
@@ -69,6 +70,7 @@ export const getFavorisByUserId = async function(userId) {
 
         return result.rows;
     } catch (error) {
+        console.error('Erreur lors de la récupération des favoris :', error);
         throw new Error('Erreur lors de la récupération des favoris : ' + error.message);
     }
 };
@@ -93,6 +95,7 @@ export const deleteFavori = async function(favoriId) {
 
         return result.rows[0];
     } catch (error) {
+        console.error('Erreur lors de la suppression du favori :', error);
         throw new Error('Erreur lors de la suppression du favori : ' + error.message);
     }
 };
