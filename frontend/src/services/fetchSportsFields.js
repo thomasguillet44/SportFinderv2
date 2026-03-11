@@ -2,7 +2,7 @@ import api from "@/api.js";
 
 export const fetchSportsFields = async function(sport, boudingBox) {
     try {
-        const response = await api.get("/map/getsportsfacilities", {
+        const response = await api.get("/api/map/getsportsfacilities", {
             params: {
                 sport: sport,
                 necoordinates: boudingBox.northEast.lat + "," + boudingBox.northEast.lon,

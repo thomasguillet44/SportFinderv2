@@ -11,7 +11,7 @@ app.use(express.json());
 
 app.use(cors());
 
-app.use('/', router);
+app.use('/api', router);
 
 /**
  * Utilisé pour tester si le back est opérationnel pour bien ordonner le lancement 
