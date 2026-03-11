@@ -2,7 +2,7 @@ import api from "@/api.js";
 
 export const addFavoriServiceFrontend = async function(userId, element) {
     try {
-        const response = await api.post('/api/favoris/addFavori', { 
+        const response = await api.post('/favoris/addFavori', { 
             userId: userId, 
             element: element
         });
