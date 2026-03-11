@@ -14,7 +14,7 @@
                             <label for="user_password">Mot de passe</label>
                             <input class="custom-input" type="password" id="user_password" v-model="user.password" placeholder="Entrez votre mot de passe..."/>
                         </div>
-                        <div v-if="errorLoginMessage" class="error-message">
+                        <div v-if="errorLoginMessage.length !== 0" class="error-message">
                             {{ errorLoginMessage }}
                         </div>
                         <div class="btn-login-container">
@@ -31,18 +31,18 @@
                     <form v-else key="register" @submit.prevent="register">
                         <div class="formGroup">
                             <label for="reg_username">Nom d'utilisateur</label>
-                            <input class="custom-input" type="text" id="reg_username" v-model="newUser.username" />
+                            <input class="custom-input" type="text" id="reg_username" v-model="newUser.username" placeholder="Entrez votre nom d'utilisateur..."/>
                         </div>
                         <div class="formGroup">
                             <label for="reg_email">Email</label>
-                            <input class="custom-input" type="email" id="reg_email" v-model="newUser.email" />
+                            <input class="custom-input" type="email" id="reg_email" v-model="newUser.email" placeholder="Entrez votre email..."/>
                         </div>
                         <div class="formGroup">
                             <label for="reg_password">Mot de passe</label>
-                            <input class="custom-input" type="password" id="reg_password" v-model="newUser.password" />
+                            <input class="custom-input" type="password" id="reg_password" v-model="newUser.password" placeholder="Entrez votre mot de passe..."/>
                         </div>
 
-                        <div v-if="errorRegisterMessage" class="error-message">
+                        <div v-if="errorRegisterMessage.length !== 0" class="error-message">
                             {{ errorRegisterMessage }}
                         </div>
 
@@ -81,10 +81,14 @@ const errorRegisterMessage = ref('');
 
 const isLoading = ref(false);
 
+let errorTimeout = null; //stocker la ref au timeout pour le clear quand on toggle (on veut pas qu'un message persiste apres toggle)
+
 const showError = (errorMessage, message) => {
+    if (errorTimeout) clearTimeout(errorTimeout);
+
     errorMessage.value = message;
 
-    setTimeout(() => {
+    errorTimeout = setTimeout(() => {
         errorMessage.value = '';
     }, 3000); // 3 secondes
 }
@@ -132,6 +136,10 @@ const newUser = ref({
 });
 
 function toggleRegister() {
+    //on clear tout avant de changer de vue pour éviter les comportements bizarres
+    errorLoginMessage.value = '';
+    errorRegisterMessage.value = '';
+    if (errorTimeout) clearTimeout(errorTimeout);
     wantToRegister.value = !wantToRegister.value;
 }
 

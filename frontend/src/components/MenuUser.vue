@@ -1,7 +1,6 @@
 <template>
     <div class="menu-container">
         <ul class="menu-list">
-            <li class="menu-item">Réglages</li>
             <li class="menu-item" @click="showFavoris">Favoris</li>
             <li class="menu-item" @click="logout">Logout</li>
         </ul>
