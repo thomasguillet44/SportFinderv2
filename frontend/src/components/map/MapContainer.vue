@@ -75,7 +75,7 @@ watch(() => props.selectedSport, () => {
             if (sportsFieldsData.elements.length === 0) {
                 message.value = "Aucun terrain de sport trouvé dans cette zone pour ce sport.";
             } else {
-                message.value = `${sportsFieldsData.elements.length} terrains de sport trouvés dans cette zone en ${timer.value.toFixed(2)} ms.`;
+                message.value = `${sportsFieldsData.elements.length} terrains de sport trouvés dans cette zone en ${(timer.value / 1000).toFixed(2)} s.`;
             }
 
             isRetourUserVisible.value = true;

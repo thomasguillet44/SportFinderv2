@@ -11,5 +11,6 @@ export const Sports = Object.freeze({
     SOCCER: { value: "soccer", label: "Football" },
     SQUASH: { value: "squash", label: "Squash" },
     TABLE_TENNIS: { value: "table_tennis", label: "Tennis de table" },
-    VOLLEYBALL: { value: "volleyball", label: "Volleyball" }
+    VOLLEYBALL: { value: "volleyball", label: "Volleyball" },
+    STREET_WORKOUT: { value: "fitness", label: "Street Workout" }
 });
