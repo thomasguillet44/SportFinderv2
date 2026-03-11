@@ -2,7 +2,7 @@ import api from "@/api.js";
 
 export const addFavoriServiceFrontend = async function(userId, element) {
     try {
-        const response = await api.post('/api/favoris/addFavori', { 
+        const response = await api.post('/favoris/addFavori', { 
             userId: userId, 
             element: element
         });
@@ -14,7 +14,7 @@ export const addFavoriServiceFrontend = async function(userId, element) {
 
 export const getFavorisByUserIdServiceFrontend = async function(userId) {
     try {
-        const response = await api.get(`/api/favoris/getFavoris/${userId}`);
+        const response = await api.get(`/favoris/getFavoris/${userId}`);
         return response;
     } catch (error) {
         throw new Error("Erreur lors de la récupération des favoris : " + error.message);
@@ -23,7 +23,7 @@ export const getFavorisByUserIdServiceFrontend = async function(userId) {
 
 export const deleteFavoriServiceFrontend = async function(favoriId) {
     try {
-        const response = await api.delete(`/api/favoris/deleteFavori/${favoriId}`);
+        const response = await api.delete(`/favoris/deleteFavori/${favoriId}`);
         return response;
     } catch (error) {
         throw new Error("Erreur lors de la suppression du favori : " + error.message);
